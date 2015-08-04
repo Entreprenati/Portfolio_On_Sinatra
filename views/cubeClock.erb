@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Cube Clock</title>  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+</head>
+<body>
+
+<div id="cube">
+
+  <div class="front side">  
+    <div class="coverDiv">      
+      <div class="timeWrap"> 
+        <span class="zone">Local</span>
+        <span class="time"></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="back side">  
+    <div class="coverDiv">
+      <div class="timeWrap">  
+        <span class="zone">London</span>
+        <span class="time"></span>
+      </div> 
+    </div>
+  </div>
+
+  <div class="right side">  
+    <div class="coverDiv">      
+      <div class="timeWrap"> 
+        <span class="zone">Tokyo</span>
+        <span class="time"></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="left side">  
+    <div class="coverDiv">
+      <div class="timeWrap"> 
+        <span class="zone">Singapore</span>
+        <span class="time"></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="top side">  
+    <div class="coverDiv"> 
+      <div class="timeWrap"> 
+        <span class="zone">Sydney</span>
+        <span class="time"></span>
+      </div>
+    </div>
+  </div>  
+
+  <div class="bottom side">  
+    <div class="coverDiv">
+      <div class="timeWrap">  
+        <span class="zone">Paris</span>
+        <span class="time"></span>
+      </div>   
+    </div>
+  </div>      
+
+</div>
+
+<ul>
+  <li id="shrink">Shrink Cube</li> 
+  <li id="grow">Grow Cube</li>
+</ul>
+
+<ul>
+
+  <li id="local">Local Time</li>
+  <li id="london">London Time</li>
+  <li id="tokyo">Tokyo Time</li>
+  <li id="singapore">Singapore Time</li>
+  <li id="sidney">Sydney Time</li>
+  <li id="paris">Paris Time</li>
+
+</ul>
+
+<style>
+
+  ul {
+    list-style: none;
+  }
+
+  li {
+    display: inline-block;
+    width: 10%;
+    min-width: 75px;
+    text-align: center;
+    border: 2px outset red;
+    border-radius: 20px;
+    margin: 20px;
+    background-color: #F3C4C4;
+    padding: 1px;
+    cursor: pointer;
+    box-shadow: 0 1px 0;   
+    font-size: 1vw;
+  }
+
+  @media all and (max-width: 960px) {
+  li {
+      font-size: .6em;
+    }
+  }
+
+  @media all and (max-width: 480px) {
+  li {
+      display: block;;
+    }
+  }
+
+  li:hover {
+    font-weight: bold;
+  }
+
+  li:active {
+    position: relative;
+    top: 1px;
+  }
+
+  #grow {
+    margin-bottom: 60px;
+  }
+
+  #cube {
+    width: 20vw;  
+    height: 20vw;
+    position: absolute;
+      top: 37.5vh;
+      left: 37.5vw;
+    perspective: 10000px;   
+    transform-style: preserve-3d;    
+  }
+
+  .side {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    border: 2px solid lightgray;
+    opacity: .7;
+    border-radius: 5px;
+    text-align: center; 
+    background-image: url(images/Cubism.jpg);   
+  }
+
+  .coverDiv {
+    height: 90%; 
+    width: 90%;
+    background-color: #A99898;
+    position: absolute;
+      top: 50%;
+      left: 50%;
+   transform: translate(-50%, -50%);   
+  }
+
+  .timeWrap {
+    position: absolute;
+      top: 50%;
+      left: 50%;
+   transform: translate(-50%, -50%);   
+  }
+
+  span {
+   display: block;
+   text-align: center;
+   font-size: 2vw;
+  }
+
+  .time {
+   border: 1px double black;  
+  }
+
+  .front  { transform: translateZ(20vw);}  
+  .back   { transform: rotateY(180deg) translateZ(0); }
+  .right  { transform: rotateY(90deg) translateX(-10vw) translateZ(10vw);  }
+  .left   { transform: rotateY(-90deg) translateX(10vw) translateZ(10vw);  }
+  .top    { transform: rotateX(90deg) translateY(10vw) translateZ(10vw);   }
+  .bottom { transform: rotateX(-90deg) translateY(-10vw) translateZ(10vw); }
+
+  @keyframes spin {
+    from { transform: rotateX(0) rotateY(0) rotateZ(0); }
+    to { transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg); }
+  }
+
+  #cube {
+    animation: spin 15s infinite linear;
+  }
+
+</style>
+
+<script>
+  
+  $('.side').mouseenter(function() {
+    $('#cube').css({
+      "animationPlayState": "paused"
+    });      
+  });
+
+  $('.side').mouseleave(function() {
+    $('#cube').css({
+      "animationPlayState": "running"
+    });      
+  });
+
+  $('#shrink').click(function() {
+
+    var newSize = ($('.side').height())*(0.8);
+    var screenWidth = $(window).width();
+    var newSizeVW = (newSize/screenWidth)*100;
+    var halfNewSizeVW = newSizeVW / 2;
+
+    var newFontSize = $('span').css('font-size');
+    var newFontSizeNum = parseFloat(newFontSize)*0.8;
+    var newFontSizeVW = (newFontSizeNum/screenWidth)*100;
+    var newFontSizeString = newFontSizeVW + 'vw';
+
+    $('#cube').css({
+      'height': newSizeVW + 'vw',
+      'width': newSizeVW + 'vw'
+    });
+    $('.front').css('transform', 'translateZ(' + newSizeVW + 'vw)');
+    $('.back').css('transform', 'rotateY(180deg) translateZ(0)'); 
+    $('.right').css('transform', 'rotateY(90deg) translateX(-' + halfNewSizeVW + 'vw) translateZ(' + halfNewSizeVW + 'vw)'); 
+    $('.left').css('transform', 'rotateY(-90deg) translateX(' + halfNewSizeVW + 'vw) translateZ(' + halfNewSizeVW + 'vw)');
+    $('.top').css('transform', 'rotateX(90deg) translateY(' + halfNewSizeVW + 'vw) translateZ(' + halfNewSizeVW + 'vw)');
+    $('.bottom').css('transform', 'rotateX(-90deg) translateY(-' + halfNewSizeVW + 'vw) translateZ(' + halfNewSizeVW + 'vw)');
+    $('span').css('font-size', newFontSizeString);
+  }); 
+
+  $('#grow').click(function() {
+
+    var newSize = ($('.side').height())*(1.2);
+    var screenWidth = $(window).width();
+    var newSizeVW = (newSize/screenWidth)*100;
+    var halfNewSizeVW = newSizeVW / 2;
+
+    var newFontSize = $('span').css('font-size');
+    var newFontSizeNum = parseFloat(newFontSize)*1.2;
+    var newFontSizeVW = (newFontSizeNum/screenWidth)*100;
+    var newFontSizeString = newFontSizeVW + 'vw';
+
+    $('#cube').css({
+      'height': newSizeVW + 'vw',
+      'width': newSizeVW + 'vw'  
+    });
+    $('.front').css('transform', 'translateZ(' + newSizeVW + 'vw)');
+    $('.back').css('transform', 'rotateY(180deg) translateZ(0)'); 
+    $('.right').css('transform', 'rotateY(90deg) translateX(-' + halfNewSizeVW + 'vw) translateZ(' + halfNewSizeVW + 'vw)'); 
+    $('.left').css('transform', 'rotateY(-90deg) translateX(' + halfNewSizeVW + 'vw) translateZ(' + halfNewSizeVW + 'vw)');
+    $('.top').css('transform', 'rotateX(90deg) translateY(' + halfNewSizeVW + 'vw) translateZ(' + halfNewSizeVW + 'vw)');
+    $('.bottom').css('transform', 'rotateX(-90deg) translateY(-' + halfNewSizeVW + 'vw) translateZ(' + halfNewSizeVW + 'vw)');
+    $('span').css('font-size', newFontSizeString);
+  }); 
+
+  function clock() {
+
+    var nowDate = new Date();
+
+    var londonHour = (nowDate.getUTCHours() +1) % 24;
+    var tokyoHour = (nowDate.getUTCHours() +9) % 24;
+    var singaporeHour = (nowDate.getUTCHours() +8) % 24;
+    var sidneyHour = (nowDate.getUTCHours() +10) % 24;
+    var parisHour = (nowDate.getUTCHours() +2) % 24;
+
+    var localTimeString = nowDate.getHours() + ':' + nowDate.getMinutes() + ':' + nowDate.getSeconds();
+    var londonTimeString = londonHour + ':' + nowDate.getMinutes() + ':' + nowDate.getSeconds();
+    var tokyoTimeString = tokyoHour + ':' + nowDate.getMinutes() + ':' + nowDate.getSeconds();
+    var singaporeTimeString = singaporeHour + ':' + nowDate.getMinutes() + ':' + nowDate.getSeconds();
+    var sidneyTimeString = sidneyHour + ':' + nowDate.getMinutes() + ':' + nowDate.getSeconds();
+    var parisTimeString = parisHour + ':' + nowDate.getMinutes() + ':' + nowDate.getSeconds();
+
+    $('.front .time').text(localTimeString);    
+    $('.back .time').text(londonTimeString);    
+    $('.right .time').text(tokyoTimeString);    
+    $('.left .time').text(singaporeTimeString);    
+    $('.top .time').text(sidneyTimeString);    
+    $('.bottom .time').text(parisTimeString);
+  }
+  setInterval(clock, 100);
+
+  $('#local').click(function() {
+    $('#cube').css({
+      "animation": "none",    
+      "transform": "rotateX(0) rotateY(0) rotateZ(0)"
+    });
+    $('.side').css("opacity", "1");
+    function restart() {
+      $('#cube').css({
+      "animation": "spin 15s infinite linear",
+    });
+    $('.side').css("opacity", ".7");
+    }
+    setTimeout(restart, 1500);
+  });
+
+  $('#singapore').click(function() {
+    $('#cube').css({
+      "animation": "none",
+      "transform": "rotateY(90deg)"
+    });
+    $('.side').css("opacity", "1");
+    function restart() {
+      $('#cube').css({
+      "animation": "spin 15s infinite linear",
+    });
+    $('.side').css("opacity", ".7");
+    }
+    setTimeout(restart, 1500);
+  });
+
+  $('#tokyo').click(function() {
+    $('#cube').css({
+      "animation": "none",
+      "transform": "rotateY(-90deg)"
+    });
+    $('.side').css("opacity", "1");
+    function restart() {
+      $('#cube').css({
+      "animation": "spin 15s infinite linear",
+    });
+    $('.side').css("opacity", ".7");
+    }
+    setTimeout(restart, 1500);
+  });
+
+  $('#london').click(function() {
+    $('#cube').css({
+      "animation": "none",
+      "transform": "rotateY(180deg)"
+    });
+    $('.side').css("opacity", "1");
+    function restart() {
+      $('#cube').css({
+      "animation": "spin 15s infinite linear",
+    });
+    $('.side').css("opacity", ".7");
+    }
+    setTimeout(restart, 1500);
+  });
+
+  $('#paris').click(function() {
+    $('#cube').css({
+      "animation": "none",
+      "transform": "rotateX(90deg)"
+    });
+    $('.side').css("opacity", "1");
+    function restart() {
+      $('#cube').css({
+      "animation": "spin 15s infinite linear",
+    });
+    $('.side').css("opacity", ".7");
+    }
+    setTimeout(restart, 1500);
+  });
+
+  $('#sidney').click(function() {
+    $('#cube').css({
+      "animation": "none",
+      "transform": "rotateX(-90deg)"
+    });
+    $('.side').css("opacity", "1");
+    function restart() {
+      $('#cube').css({
+      "animation": "spin 15s infinite linear",
+    });
+    $('.side').css("opacity", ".7");
+    }
+    setTimeout(restart, 1500);
+  });
+
+</script>    
+
+</body>
+</html>

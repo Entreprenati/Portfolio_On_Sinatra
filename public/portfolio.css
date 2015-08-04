@@ -1,0 +1,356 @@
+#homePage {
+  margin: 0;
+  background-image: url(images/flowerPath.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+* {
+  font-family: 'Tillana', cursive;
+}
+
+a {
+  text-decoration: none;  
+  color: darkgreen;
+}
+
+ul {  
+  list-style: none;
+  text-align: center;
+  border: .2vw solid #595757;
+  border-radius: 5%;
+  padding: 0;
+  background-color: black;
+  box-shadow: 3vw 2vw 7vw 2vw orange inset;
+  margin: 0;
+}
+
+li {
+  font-size: 1.5vw;
+  font-weight: bold;
+  padding: 1vw;
+  border-radius: 10%;
+  margin: 5% 5%;
+  background: -webkit-radial-gradient(#ECEAD0, #D2D717);
+  background: radial-gradient(#ECEAD0, #D2D717);
+  cursor: pointer;
+}
+
+#navBarWrapper {
+  width: 17vw; 
+  border: .1vw;
+  border-radius: 5%;
+  box-shadow: 0vw 0vw .2vw .2vw #F6D59D;
+  padding: 0;
+  position: fixed;
+    top: 3vw;
+    right: 1vw;  
+  background-color: #EEE1CA;
+  -webkit-transform: perspective(20vw) rotateY( -7.5deg );
+          transform: perspective(20vw) rotateY( -7.5deg );
+  z-index: 10;
+}
+
+#logo {
+  position: relative;
+  width: 50%;
+  height: 20vw;
+  color: white;
+  z-index: 100;  
+}
+
+#upper {
+  font-size: 10vw;
+  position: relative;
+    left: 5vw;
+  font-weight: bold;
+  text-shadow: .2vw .2vw .2vw black;
+
+}
+
+#lower {
+  font-size: 5vw;  
+  position: relative;
+    bottom: 6vw;
+    left: 12vw;  
+  text-shadow: .1vw .1vw .1vw black;
+}
+
+#badScapeDiv, #planningDiv, #workDiv, #goodScapeDiv {
+  height: 27vw; 
+  width: 40vw;
+  border: .2vw solid black;
+  border-radius: 20%;
+  overflow: hidden;
+}
+
+#badScapePic, #planningPic, #workPic, #goodScapePic {
+  height: 100%;
+  width: 100%;
+}
+
+.caption {  
+  text-align: center;
+  width: 40vw;
+  font-size: 5vw;
+  font-family: 'Tillana', cursive;
+  position: absolute;
+    top: 50%;
+    left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  background-color: rgba(255, 255, 255, 1);
+  padding: 0 1vw 2vw 1vw;
+  border: .2vw white solid;
+  border-radius: 10%;
+}
+
+.one {
+  z-index: 4;
+}
+
+.two {
+  z-index: 3;
+}
+
+.three {
+  z-index: 2;
+}
+
+.four {
+  z-index: 1;
+}
+
+#example {
+  width: 90%;
+  height: 90%;
+  position: absolute;
+    top: 50%;
+    left: 50%;
+  transform: translate(-50%, -50%);
+
+  border: .2vw solid #595757;
+  border-radius: 5%;
+  padding: 0;
+  background-color: #9B885F;
+  box-shadow: 0vw 0vw 10vw 2vw darkgray inset;
+  margin: 0;
+}
+
+#example li {
+  font-size: 1.5vw;
+  font-weight: bold;
+  padding: 1vw;
+  border-radius: 10%;
+  margin: 5% 5%;
+  background: -webkit-radial-gradient(#ECEAD0, #D2D717);
+  background: radial-gradient(#ECEAD0, #D2D717);
+  cursor: pointer;
+}
+
+#infoHeading { 
+  font-size: 1vw;   
+  margin: 1% 1%;  
+  padding: 1vw;
+}
+
+form {
+  color: darkgreen;
+  font-weight: bold;
+  margin-top: 2vw;
+  position: absolute;
+    left: 50%;
+  transform: translateX(-50%);
+  font-size: 1vw;
+
+}
+
+#pic {
+  color: black;
+  font-size: 1em;  
+  text-shadow: .2vw .2vw .2vw black;
+  font-weight: bold;
+  border-radius: 20%;
+  cursor: pointer;
+}
+
+#submit {
+  color: yellow;
+  font-size: 2vw;  
+  text-shadow: .2vw .2vw .2vw green;
+  font-weight: bold;
+  background-image: url("images/yellowFlowers.jpg");
+  border: .1vw solid green;
+  border-radius: 20%;
+  cursor: pointer;
+  padding: .1vw .7vw .1vw .3vw;
+
+}
+
+#errorMessage {
+  display: none;
+  padding: 1vw;;
+  background-color: darkgray;
+  color: white;
+  font-size: 1vw;
+  font-weight: bold;
+  border: .1vw red solid;
+  border-radius: 20%;
+  text-shadow: .1vw .1vw .1vw black;
+  z-index: 100;
+}
+
+#awardPage {
+  background-color: yellow;
+  height: 100vh;
+  position: relative;
+  margin: 0;
+}
+
+ @keyframes backForth {
+    0%    {transform: rotateZ(-20deg) rotateY(0deg);}
+    25%   {transform: rotateZ(-20deg) rotateY(30deg);}
+    50%   {transform: rotateZ(-20deg) rotateY(0deg);}
+    75%   {transform: rotateZ(-20deg) rotateY(-30deg);}
+    100%  {transform: rotateZ(-20deg) rotateY(0deg);}
+  }
+
+#awardPalms {
+/*  position: absolute;
+    top: 1%;
+    left: 50%;*/
+  float: left;
+  transform: translateX(-50%);  
+  font-family: Georgia;
+  height: 40vw;
+  width: 40vw;
+  background-image: url("images/awardPalms.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-color: yellow;
+  background-blend-mode: multiply;
+  font-size: 1.5vw;
+  color: green;
+  text-shadow: .05vw .05vw .05vw black;
+  animation: backForth 10s infinite linear;
+}
+
+#awardCaption {
+  position: absolute;
+    top: 30%;
+    left: 50%;
+  transform: translateX(-50%);  
+  font-size: 1.35vw;
+  font-weight: bold;
+}
+
+#awardCompanyName {
+  position: absolute;
+    top: 40%;
+    left: 50%;
+  transform: translateX(-50%);  
+  font-size: 1.8vw;
+}
+
+#awardYear {
+  position: absolute;
+    top: 50%;
+    left: 50%;
+  transform: translateX(-50%);  
+  font-size: 1.8vw;
+}
+
+#rightCompany {
+  position: fixed;
+    bottom: 0;
+    left: 50%;
+  transform: translateX(-50%);
+  height: 20vw;
+  width: 50vw;
+  background-image: url("images/rightCompany.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.fakeNav {
+  width: 80%;
+  margin: 3% auto;
+  position: absolute;
+    bottom: 0%;
+    left: 50%;
+  transform: translateX(-50%);
+  border: .1vw;
+  border-radius: 5%;
+  box-shadow: 0vw 0vw .2vw .2vw #F6D59D;
+  padding: 0;
+  background-color: #EEE1CA;
+  z-index: 10;
+}
+
+.fakeUL {
+ list-style-type: none;
+ padding: .25vw;
+ width: 99%;
+ margin: auto;
+ text-align: center;
+}
+
+.fakeLI {
+ display: inline-block;
+ margin: 0 2.5%;
+ font-size: 1.5vw;
+}
+
+.spiral {
+  
+  -webkit-animation-name: spiral;
+  -webkit-animation-duration: 1s;
+  -webkit-animation-iteration-count: 2;
+  -webkit-animation-timing-function: linear;
+  -webkit-animation-delay: 0;
+
+  animation-name: spiral;
+  animation-duration: 1s;
+  animation-iteration-count: 2;
+  animation-timing-function: linear;
+  animation-delay: 0;
+}
+
+@-webkit-keyframes spiral {
+  0% {-webkit-transform: rotate(0) translate(0, 0);transform: rotate(0) translate(0, 0);} 
+  100% {-webkit-transform: rotate(360deg) translate(350px, 400px);transform: rotate(360deg) translate(350px, 400px);} 
+}
+
+@keyframes spiral {
+  from {transform: rotate(0deg) translate(0, 0);} 
+  to {transform: rotate(360deg) translate(350px, 400px);}
+} 
+
+#again {
+  position: absolute;
+    top: 10%;
+    left: 45%;
+  transform: translateX(-50%);
+}
+
+#home {
+  position: absolute;
+    bottom: 10%;
+    left: 45%;
+  transform: translateX(-50%);
+}
+
+#thoughtBubble {
+  position: absolute;
+    top: -5%;
+    left: -20%;
+}
+
+.one span {  
+  font-size: 1.25vw;
+  display: inline-block;
+  position: absolute;
+    top: -5%;
+    left: -10%;
+}

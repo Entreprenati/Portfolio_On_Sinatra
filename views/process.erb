@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Pace's Process</title>  
+  <link rel="stylesheet" type="text/css" href="portfolio.css">  
+  <link href='http://fonts.googleapis.com/css?family=Tillana:400,800' rel='stylesheet' type='text/css'>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+</head>
+<body>
+
+<div id="pageWrapper">
+  
+<div class="caption one">Beginning
+    <div id="badScapeDiv">
+      <img id="badScapePic" src="images/MeLooking.jpg">
+    </div>
+  </div>
+
+  <div class="caption two">Debugging
+    <div id="planningDiv">
+      <img id="planningPic" src="images/MePullingHair.jpg">
+    </div>
+  </div>
+
+  <div class="caption three">Debugging 2:00AM
+    <div id="workDiv">
+      <img id="workPic" src="images/MeGrabbing.jpg">
+    </div>
+  </div>
+
+  <div class="caption four">Masterpiece
+    <div id="goodScapeDiv">
+      <img id="goodScapePic" src="images/MeMasterpiece.jpg">
+    </div>
+  </div>
+
+</div>
+
+  <ul id="example">
+    <li id="again">See Again</li>
+    <li id="home">Home Page</li>
+  </ul>
+
+<script>
+
+$(document).ready(function() {
+
+  var slides = ['one', 'two', 'three', 'four'];
+
+  function slideShow () {
+    for (var i = 0; i < slides.length; i++) {
+      $('.' + slides[i]).fadeIn(0);
+    }
+    var n = 0;
+    setTimeout(function() {
+      $('.' + slides[n++]).fadeOut(2000);
+    }, 2000);
+
+    var id = setInterval(function() {
+      $('.' + slides[n++]).fadeOut(2000);
+      if (n==slides.length) {
+        clearInterval(id);
+       }
+    }, 5000);
+  }
+  slideShow();
+
+  $('#again').click(slideShow);
+
+  $('#info').click(function() {
+    window.location = 'info.html';
+  });
+
+  $('#contact').click(function() {
+    window.location = 'contact.html';
+  });
+
+  $('#home').click(function() {
+    window.location = '/';
+  });
+
+});
+
+</script>
+
+</body>
+</html>

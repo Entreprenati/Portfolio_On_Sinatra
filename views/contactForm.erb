@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Contact Form</title>  
+  <link rel="stylesheet" type="text/css" href="contactForm.css">  
+  <link href='http://fonts.googleapis.com/css?family=Tillana:400,800' rel='stylesheet' type='text/css'>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+</head>
+<body>
+
+<ul>
+  <li id="infoHeading">Just fill out this form and . . . <br> We'll make your landscaping dreams come true!</li> 
+</ul>
+
+<form id="ajax-contact" action="/contact" method="post">
+
+<!-- action="javascript:;" -->
+
+<!--   <span>Upload a picture of the area you want to landscape:</span>
+  <input type="file" name="pic" accept="img/*" size="40" id="pic"> -->
+
+  <p>Tell us your landscaping dreams:</p>
+  <textarea name="desires"></textarea>
+  <!-- <input type="submit" name="desires" value="Submit Desires"> -->
+
+  <p>Name:
+    <input type="text" name="name" id="name">
+  </p>
+
+  <p>Email Address:
+    <input type="text" name="email" id="email">
+  </p>
+
+  <p>Price Range: 
+   <input type="radio" name="price" value="low">Low
+   <input type="radio" name="price" value="mid">Mid
+   <input type="radio" name="price" value ="high">High 
+  </p>
+
+  <p>Do You Want (click all that apply):
+    <input type="checkbox" name="features" value="pond" id="pond">Pond
+    <input type="checkbox" name="features" value="waterfall" id="waterfall">Waterfall
+    <input type="checkbox" name="features" value="gazebo" id="gazebo">Gazebo
+    <input type="checkbox" name="features" value="fence" id="fence">Fence
+  </p>
+
+  <p>How Did You Hear About Us:
+  <select name="hear" size="2">
+    <option value="friend">Friend</option>
+    <option value="web">Web</option>
+    <option value="radio">Radio</option>  
+    <option value="TV">TV</option>
+    <option value="sign">Sign</option>
+  </select>
+  </p> 
+    
+  <button type="submit" id="submit">SUBMIT</button>
+
+  <span id="errorMessage"></span>
+
+</form>
+
+<script>
+
+$(document).ready(function() {
+
+  var form = $('#ajax-contact');
+
+  $(form).submit(function(event) {
+
+    event.preventDefault();
+
+    var formData = $(form).serialize();
+
+    // Submit the form using AJAX.
+    $.ajax({
+      type: 'POST',
+      url: $(form).attr('action'),
+      data: formData
+    });
+
+    var name = $('#name').val();
+    var email = $('#email').val();    
+    var price = $("input:radio[name=price]:checked").val();
+    if (price === undefined) {price = 'well'};
+
+    var pond = $('#pond').is(':checked');   
+    var waterfall = $('#waterfall').is(':checked');   
+    var gazebo = $('#gazebo').is(':checked');   
+    var fence = $('#fence').is(':checked');
+
+    var features = [];
+
+      if (pond) {features.push(' pond')};
+      if (waterfall) {features.push(' waterfall')};
+      if (gazebo) {features.push(' gazebo')};
+      if (fence) {features.push(' fence')};
+      
+        if (features.length === 0) {features = ' everything you could possibly want'}
+          else if (features.length > 1) {
+            if (features.length === 2) {
+              var last = features.splice(-1, 1);
+              var penultimate = features.splice(-2, 1);
+              features = penultimate + ' and' + last;  
+            }  
+              else {
+                var lastOfMany = features.splice(-1, 1);
+                features.push(' and' + lastOfMany);  
+              };  
+          };
+       
+      if (name === "" && email === "") {$('#errorMessage').text('No name or email?').fadeIn()}
+        else if (name === "") {$('#errorMessage').text('No name?').fadeIn()}
+          else if (email === "") {$('#errorMessage').text('No email?').fadeIn()}
+            else {
+              $('#errorMessage').fadeOut(0);
+              $('#infoHeading').text('');
+              $('form').text("Thanks " + name + ". We'll email you soon at " + email + ' about your ' + price + '-priced dream landscape with' + features +'.');
+              $('form').css("font-size", "3vw");
+              $('form').css("text-shadow", ".05vw .05vw .05vw orange");
+            }
+  });
+});
+
+</script>
+
+</body>
+</html>
