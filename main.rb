@@ -24,6 +24,18 @@ get '/contact' do
   erb :contactForm
 end
 
-post '/contact' do
-  puts "I got the data"
+get '/contactData' do
+  puts "I got the data by GET"
+  "GET data was #{params}"
+
+end
+
+post '/contactData' do
+  puts "I got the data by POST"
+  "POST data was #{params}"
+
+  #"#{params.inspect]"
+
+  # "#{params[:desires]}     #{params[:name]}     #{params[:email]}     #{params[:price]}     #{params[:features]}     #{params[:hear]}"
+
 end

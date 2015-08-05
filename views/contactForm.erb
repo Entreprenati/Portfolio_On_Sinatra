@@ -12,16 +12,12 @@
   <li id="infoHeading">Just fill out this form and . . . <br> We'll make your landscaping dreams come true!</li> 
 </ul>
 
-<form id="ajax-contact" action="/contact" method="post">
+<form id="ajax-contact" action="/contactData" method="get">
 
 <!-- action="javascript:;" -->
 
-<!--   <span>Upload a picture of the area you want to landscape:</span>
-  <input type="file" name="pic" accept="img/*" size="40" id="pic"> -->
-
   <p>Tell us your landscaping dreams:</p>
   <textarea name="desires"></textarea>
-  <!-- <input type="submit" name="desires" value="Submit Desires"> -->
 
   <p>Name:
     <input type="text" name="name" id="name">
@@ -38,10 +34,10 @@
   </p>
 
   <p>Do You Want (click all that apply):
-    <input type="checkbox" name="features" value="pond" id="pond">Pond
-    <input type="checkbox" name="features" value="waterfall" id="waterfall">Waterfall
-    <input type="checkbox" name="features" value="gazebo" id="gazebo">Gazebo
-    <input type="checkbox" name="features" value="fence" id="fence">Fence
+    <input type="checkbox" name="features[]" value="pond" id="pond">Pond
+    <input type="checkbox" name="features[]" value="waterfall" id="waterfall">Waterfall
+    <input type="checkbox" name="features[]" value="gazebo" id="gazebo">Gazebo
+    <input type="checkbox" name="features[]" value="fence" id="fence">Fence
   </p>
 
   <p>How Did You Hear About Us:
@@ -72,11 +68,16 @@ $(document).ready(function() {
 
     var formData = $(form).serialize();
 
-    // Submit the form using AJAX.
+    console.log(formData);
+
+    // Submit the form using AJAX
     $.ajax({
-      type: 'POST',
+      type: 'GET',
       url: $(form).attr('action'),
-      data: formData
+      data: formData,
+      success: function (result) {
+         console.log("This is the result sent back to ajax:" + result);
+      }
     });
 
     var name = $('#name').val();
